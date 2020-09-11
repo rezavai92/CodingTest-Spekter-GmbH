@@ -1,6 +1,6 @@
 # A Full Screen Google Map Implementation in ReactJS
 
-Requirements:
+### Requirements:
 
 - Full screen google map implementation
 - placing a marker on my current location
