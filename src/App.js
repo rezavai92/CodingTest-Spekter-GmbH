@@ -1,37 +1,43 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import Modal from './components/modal'
 import {
   GoogleMap,
   useLoadScript,
   Marker,
-  InfoWindow,
 } from "@react-google-maps/api";
+
 const libraries = ["places"];
 const style = {
   height: "100vh",
   width: "100vw",
 };
 
-const center ={
-  lng : 91.843199 ,
-  lat : 22.375249,
-}
-
-
-
 
  const App = ()=>{
-
+  const [center,setCenter] =useState({});
   const [currentLocation,setCurrentLocation] = useState({});
   const [modalShow, setModalShow] = useState(false);
 
   
+  useEffect(()=>{
+
+    navigator.geolocation.getCurrentPosition((position)=>{
+      setCenter({
+        lng: Number(position.coords.longitude),
+        lat: Number(position.coords.latitude), 
+      })}
+      
+      ,(err)=>{return err})
+
+  },[])
+  
+
   const markerFormHandler = (event)=>{
 
     const lng =event.latLng.lng();
     const lat = event.latLng.lat();
     const location={lng,lat};
-   setCurrentLocation(location) ;
+    setCurrentLocation(location) ;
    
   
   setModalShow(true);  
@@ -56,10 +62,10 @@ const center ={
      <GoogleMap mapContainerStyle={style} zoom={10} center={center} >
      <div style={{marginLeft:"50%" }} >
      <Modal 
-     open={modalShow}
-     onClose={()=>{setModalShow(false)}}
-     setCurrentLocation={setCurrentLocation}
-     location ={currentLocation}
+      open={modalShow}
+      onClose={()=>{setModalShow(false)}}
+      setCurrentLocation={setCurrentLocation}
+      location ={currentLocation}
 
     />
      </div>
@@ -74,5 +80,5 @@ const center ={
      
   </div>)
 }
-
+ 
 export default App;
