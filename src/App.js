@@ -18,7 +18,7 @@ const style = {
   const [currentLocation,setCurrentLocation] = useState({});
   const [modalShow, setModalShow] = useState(false);
 
-  
+   
   useEffect(()=>{
 
     navigator.geolocation.getCurrentPosition((position)=>{
@@ -58,7 +58,9 @@ const style = {
   }
 
 
-  return (<div>
+  return (
+   
+     <div>
      <GoogleMap mapContainerStyle={style} zoom={10} center={center} >
      <div style={{marginLeft:"50%" }} >
      <Modal 
@@ -76,7 +78,7 @@ const style = {
     </Marker>
 
    
-     </GoogleMap>
+     </GoogleMap> 
      
   </div>)
 }

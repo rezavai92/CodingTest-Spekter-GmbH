@@ -26,15 +26,23 @@ const MODAL_STYLES = {
   
   export default function Modal({ open, onClose,location,setCurrentLocation }) {
 
-    const [myName,setMyName] =useState("Md. Rezaul Karim");
+
+
+    const [myName,setMyName] =useState("");
+    
     if (!open) return null
   
 
    const  submissionHandler=(event)=>{
 
     event.preventDefault();
+  
     console.log("Current Location : "+event.currentTarget[0].value+"\nName : "+event.currentTarget[1].value);
+   
     onClose();
+    setMyName("");
+  
+    
    }
     return ReactDOM.createPortal(
       <>
@@ -48,7 +56,7 @@ const MODAL_STYLES = {
                     <label>Location </label>
                   </td>
                   <td>
-                     <input id="location" type="text"  defaultValue={`(${location.lat} , ${location.lng})`} />
+                     <input id="location" type="text"   defaultValue={`(${location.lat} , ${location.lng})`} />
                   </td>
                 </tr>
                 <tr>
